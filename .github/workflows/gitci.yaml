@@ -1,13 +1,11 @@
 name: boardgame CI
 on:
   push:
-    branches:
-      - main
-
+    branches: ["main"]
 jobs:
   
   compile:
-    runs-on: self-runner
+    runs-on: Agent-1
 
     steps:
       - name: Checkout code
@@ -19,6 +17,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-          
+
       - name: Build with Maven
         run: mvn compile
