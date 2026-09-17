@@ -1,0 +1,12 @@
+name: boardgame CI
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: self-runner 
+    steps:
+      - name: print message
+        run: echo "Hello, World!"
