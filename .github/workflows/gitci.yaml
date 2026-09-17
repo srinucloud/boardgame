@@ -26,5 +26,7 @@ jobs:
     # Step 3: Run the Maven command
     - name: Build and install with Maven
       run: mvn --batch-mode --update-snapshots install
-    
+      
+    - name: Package with Maven
+      run: mvn clean package
 
