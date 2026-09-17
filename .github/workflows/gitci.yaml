@@ -1,25 +1,30 @@
-name: boardgame CI
+name: Java CI with Maven
+
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
 jobs:
-  
-  compile:
+  build:
     runs-on: Agent-1
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
+    # Step 1: Check out the repository source code
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: maven
+    # Step 2: Set up the Java JDK and configure Maven caching
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin' # Popular open-source OpenJDK distribution
+        cache: 'maven'          # Automatically caches your ~/.m2/repository
 
-      - name: Maven Install
-        run: maven install -y
+    # Step 3: Run the Maven command
+    - name: Build and install with Maven
+      run: mvn --batch-mode --update-snapshots install
+    
 
-      - name: Build with Maven
-        run: mvn compile
